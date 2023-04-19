@@ -1,12 +1,14 @@
 package com.diogocosta.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.diogocosta.demo.domain.User;
 import com.diogocosta.demo.repository.UserRepository;
+import com.diogocosta.demo.services.exeption.ObjectNotFoundException;
 
 @Service
 public class UserServices {
@@ -18,4 +20,10 @@ public class UserServices {
         return repo.findAll();
     }
 
+    public User findById(String id) {
+        Optional<User> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    
 }
