@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.diogocosta.demo.domain.Post;
 import com.diogocosta.demo.domain.User;
 import com.diogocosta.demo.dto.UserDTO;
 import com.diogocosta.demo.services.UserServices;
@@ -36,7 +37,7 @@ public class UserResource {
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
 
-    @RequestMapping(value =  "/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
         User obj = service.fromDTO(objDto);
         obj = service.insert(obj);
@@ -50,7 +51,7 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value =  "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
         User obj = service.fromDTO(objDto);
         obj.setId(id);
@@ -58,4 +59,9 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
 }
