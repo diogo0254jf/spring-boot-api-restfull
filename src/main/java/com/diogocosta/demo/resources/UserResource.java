@@ -16,13 +16,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.diogocosta.demo.domain.Post;
 import com.diogocosta.demo.domain.User;
 import com.diogocosta.demo.dto.UserDTO;
-import com.diogocosta.demo.services.UserServices;
+import com.diogocosta.demo.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
     @Autowired
-    private UserServices service;
+    private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UserDTO>> findAll() {

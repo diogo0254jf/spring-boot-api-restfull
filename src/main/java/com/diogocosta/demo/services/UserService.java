@@ -12,7 +12,7 @@ import com.diogocosta.demo.repository.UserRepository;
 import com.diogocosta.demo.services.exeption.ObjectNotFoundException;
 
 @Service
-public class UserServices {
+public class UserService {
 
     @Autowired
     private UserRepository repo;
@@ -47,7 +47,7 @@ public class UserServices {
     }
 
     public User fromDTO(UserDTO objDto) {
-		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
-	}
-    
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+    }
+
 }
